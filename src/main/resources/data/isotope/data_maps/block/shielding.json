@@ -1,0 +1,21 @@
+{
+  "values": {
+    "#minecraft:base_stone_overworld": 12.0,
+    "#minecraft:dirt": 12.0,
+    "#minecraft:sand": 12.0,
+    "minecraft:gravel": 12.0,
+    "#minecraft:deepslate_ore_replaceables": 12.0,
+    "#minecraft:logs": 25.0,
+    "#minecraft:planks": 25.0,
+    "#minecraft:wool": 25.0,
+    "#c:glass_blocks": 14.0,
+    "#c:concretes": 6.0,
+    "minecraft:obsidian": 6.0,
+    "minecraft:crying_obsidian": 6.0,
+    "#minecraft:anvil": 2.5,
+    "minecraft:iron_block": 2.5,
+    "minecraft:netherite_block": 2.5,
+    "#c:storage_blocks/lead": 1.2,
+    "#c:glass_panes": 14.0
+  }
+}

@@ -1,0 +1,37 @@
+package dev.isotopelib.sim.engine;
+
+public enum FailureEvent {
+    PORV_STUCK_OPEN,
+
+    LOCA,
+
+    PUMP_TRIP,
+
+    ALL_PUMPS_TRIP,
+
+    LOSS_OF_OFFSITE_POWER,
+
+    DIESELS_FLOODED,
+
+    STATION_BLACKOUT,
+
+    FEEDWATER_LOSS,
+
+    TURBINE_TRIP,
+
+    LOSS_OF_HEAT_SINK,
+
+    ROD_EJECTION,
+
+    STUCK_RODS,
+
+    SENSOR_DRIFT,
+
+    SENSOR_DEAD,
+
+    STEAM_GENERATOR_TUBE_RUPTURE,
+
+    CABLE_FIRE,
+
+    BORON_DILUTION
+}

@@ -1,0 +1,13 @@
+{
+  "death.attack.isotope.radiation": "%1$s died of radiation sickness",
+  "isotope.configuration.radiation": "Radiation",
+  "isotope.configuration.sickness": "Radiation Sickness",
+  "isotope.configuration.falloutKillsPlants": "Fallout Kills Plants",
+  "isotope.configuration.doseTimeScale": "Dose Time Scale",
+  "isotope.configuration.doseRecoveryMsvPerSecond": "Dose Recovery (mSv/s)",
+  "isotope.configuration.doseHalfLifeSeconds": "Dose Half-Life (s)",
+  "isotope.configuration.blockThicknessCm": "Block Thickness (cm)",
+  "isotope.configuration.falloutDoseRate": "Fallout Dose Rate (µSv/s)",
+  "isotope.configuration.itemRadiation": "Item Radiation",
+  "death.attack.isotope.radiation.player": "%1$s died of radiation sickness while fighting %2$s"
+}

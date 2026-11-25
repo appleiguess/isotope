@@ -1,0 +1,33 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+logoFile="logo.png"
+logoBlur=false
+description='''A nuclear and thermal physics engine for other mods. Adds no blocks, items or other content by itself.'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Before 0.612 Going Nuclear keeps the same dose and fallout itself; both at once would fight over the saves.
+[[dependencies.${mod_id}]]
+    modId="goingnuclear"
+    type="incompatible"
+    versionRange="(,0.612)"
+    ordering="NONE"
+    side="BOTH"

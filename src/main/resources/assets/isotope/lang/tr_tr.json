@@ -1,0 +1,13 @@
+{
+  "death.attack.isotope.radiation": "%1$s radyasyon hastalığından öldü",
+  "isotope.configuration.radiation": "Radyasyon",
+  "isotope.configuration.sickness": "Radyasyon Hastalığı",
+  "isotope.configuration.falloutKillsPlants": "Serpinti Bitkileri Öldürür",
+  "isotope.configuration.doseTimeScale": "Doz Zaman Ölçeği",
+  "isotope.configuration.doseRecoveryMsvPerSecond": "Doz İyileşmesi (mSv/sn)",
+  "isotope.configuration.doseHalfLifeSeconds": "Doz Yarı Ömrü (sn)",
+  "isotope.configuration.blockThicknessCm": "Blok Kalınlığı (cm)",
+  "isotope.configuration.falloutDoseRate": "Serpinti Doz Hızı (µSv/sn)",
+  "isotope.configuration.itemRadiation": "Eşya Radyasyonu",
+  "death.attack.isotope.radiation.player": "%1$s, %2$s ile savaşırken radyasyon hastalığından öldü"
+}
