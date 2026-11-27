@@ -15,9 +15,18 @@ public final class IsotopeConfig {
     public static final ModConfigSpec.BooleanValue SICKNESS = B
             .comment("If false, a dose is only counted and has no effect on the player.")
             .define("sickness", true);
+    public static final ModConfigSpec.BooleanValue ACUTE_RADIATION_SYNDROME = B
+            .comment("Radiation sickness runs its real course above 1 Sv: first nausea, then a calm phase where you feel fine, then the illness. The higher the dose, the shorter the calm. False: the old random bouts.")
+            .define("acuteRadiationSyndrome", true);
+    public static final ModConfigSpec.DoubleValue SYNDROME_SPEED = B
+            .comment("How fast the phases of radiation sickness pass. 1 is the default lengths, 2 is twice as fast.")
+            .defineInRange("syndromeSpeed", 1.0, 0.1, 10.0);
     public static final ModConfigSpec.BooleanValue FALLOUT_KILLS_PLANTS = B
             .comment("If false, fallout leaves grass, leaves, flowers and crops alone.")
             .define("falloutKillsPlants", true);
+    public static final ModConfigSpec.BooleanValue CONTAMINATION = B
+            .comment("Fallout dust and spilled radioactive material stick to you, your armour and your things, and keep radiating until washed off in water, in the rain or in a water cauldron. Taking off contaminated armour leaves most of it behind. False: nothing sticks.")
+            .define("contamination", true);
     public static final ModConfigSpec.DoubleValue DOSE_TIME_SCALE = B
             .comment("Time scale of exposure: one game second counts as this many real seconds of exposure.")
             .defineInRange("doseTimeScale", 20000.0, 0.0, 1.0e9);

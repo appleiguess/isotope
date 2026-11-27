@@ -11,7 +11,7 @@ Reactors, decay chains, radiation and fallout. No blocks, no items, only the phy
 ![Minecraft 1.21.1](https://img.shields.io/badge/Minecraft-1.21.1-3c8527?style=flat-square)
 ![NeoForge 21.1](https://img.shields.io/badge/NeoForge-21.1.256%2B-e68c37?style=flat-square)
 ![Java 21](https://img.shields.io/badge/Java-21-2a78d6?style=flat-square)
-![Version 0.1.0](https://img.shields.io/badge/version-0.1.0_experimental-8a6fd1?style=flat-square)
+![Version 0.1.1](https://img.shields.io/badge/version-0.1.1_experimental-8a6fd1?style=flat-square)
 [![License: LGPL 3.0](https://img.shields.io/badge/license-LGPL_3.0-4bb7c9?style=flat-square)](COPYING.LESSER)
 
 [What it does](#what-it-does) ·
@@ -42,8 +42,8 @@ It was taken out of **Create: Going Nuclear**, which uses it from version 0.612 
 | ⚛️ **Reactors** | Point kinetics with six delayed neutron groups, Doppler and void feedback, boron, xenon and samarium, decay heat, a two-out-of-four protection system, accidents up to a core melt |
 | 🧪 **Decay** | 34 nuclides with measured half-lives and their chains. Any time step is exact, from one tick to a billion years |
 | ☢️ **Radiation** | Alpha, beta and gamma from items, blocks, machines and the ground; inverse square law, shielding block by block, protective clothing |
-| 🩺 **Dose** | Counted in millisieverts and saved with the player, with radiation sickness that gets worse as it rises |
-| 🌬️ **Fallout** | One value per chunk. It drifts with the wind, spreads, fades and kills plants, and it does not care whether a reactor or a bomb released it |
+| 🩺 **Dose** | Counted in millisieverts and saved with the player, with radiation sickness that runs its real course: nausea, a calm phase, then the illness |
+| 🌬️ **Fallout** | One value per chunk. It drifts with the wind, spreads, fades and kills plants, and it does not care whether a reactor or a bomb released it. Its dust sticks to people and their things until washed off |
 | 🧩 **Open to other mods** | What radiates, shields and protects is data. Mods that use Isotope understand each other's materials without extra code |
 
 ```mermaid
@@ -74,6 +74,20 @@ radiates until another mod or a data pack says so.
 
 The settings are under **Mods → Isotope → Config** while you are in a world: radiation on or off, sickness, whether fallout
 kills plants, dose rates and recovery.
+
+**Radiation sickness.** Above 100 mSv you feel sick. Above 1 Sv (1000 mSv) the illness runs its real course
+(`acuteRadiationSyndrome`, on by default): first nausea, weakness and vomiting for one to two minutes, then a calm phase in
+which you feel completely fine, then the illness itself: hunger, weakness, damage, no healing and fewer hearts, one heart less
+per Sv above 1 Sv, at most 6 hearts less. The higher the dose, the shorter the calm: 15 minutes at 1 to 2 Sv, 8 at 2 to 4, 4 at 4 to 6, 1 at
+6 to 8, none above 8 Sv. It ends when the dose has fallen below 500 mSv. `syndromeSpeed` makes it all faster or slower. Turn
+`acuteRadiationSyndrome` off for the old random bouts.
+
+**Contamination.** Fallout dust settles on you when you stand in it under the open sky (`contamination`, on by default): on
+each armour piece you wear, and on your skin where you wear none. It keeps radiating after you leave, mostly beta, and you
+breathe some of it in without a respirator. Water washes it off in about half a minute, rain slowly. Taking the armour off
+leaves its dust on the armour, which then radiates like any radioactive item, in a chest too. Use a contaminated item on a water
+cauldron to wash it, like dyed leather. Contaminated items show specks of dust in their slot and the amount in their tooltip, and
+a contaminated player sheds falling dust.
 
 ## Using it in your mod
 
@@ -148,8 +162,10 @@ the head.
 
 ```java
 IsotopeApi.addDose(player, 50f);                    // millisieverts
+IsotopeApi.syndromePhase(player);                   // NONE, PRODROMAL, LATENT or MANIFEST
 IsotopeApi.releaseFallout(level, pos, 2500);        // a reactor or a bomb, all the same
 double here = IsotopeApi.falloutAt(level, x, z);
+IsotopeApi.contaminate(player, 5e6);                // becquerels of dust from your spill
 ```
 
 **A reactor core**
@@ -198,7 +214,7 @@ Nuclides.register(new Nuclide("Th-232", 232, 1.405e10 * YEAR, Nuclide.Mode.ALPHA
 [[dependencies.mymod]]
     modId="isotope"
     type="required"
-    versionRange="[0.1.0,0.2.0)"
+    versionRange="[0.1.1,0.2.0)"
     ordering="AFTER"
     side="BOTH"
 ```
@@ -207,7 +223,7 @@ There is no public Maven yet. Until then, run `gradlew publish` here and point y
 
 ```groovy
 repositories { maven { url = file('../isotope/repo') } }
-dependencies { implementation('dev.isotopelib:isotope:0.1.0') { transitive = false } }
+dependencies { implementation('dev.isotopelib:isotope:0.1.1') { transitive = false } }
 ```
 
 ### Where things are
@@ -269,6 +285,7 @@ gradlew publish      # put the jar into repo/ for other projects on this machine
 
 - [x] Reactor physics, decay chains, radiation, dose and fallout
 - [x] Data maps for emission, shielding and protection
+- [x] Acute radiation syndrome: nausea, calm phase, illness
 - [x] Create: Going Nuclear runs on it
 - [ ] A public Maven
 - [ ] Waste in Going Nuclear based on real nuclides

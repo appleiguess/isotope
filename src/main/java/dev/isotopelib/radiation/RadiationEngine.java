@@ -230,9 +230,16 @@ public final class RadiationEngine {
             player.setData(DoseAttachments.DOSE_MSV.get(), dose);
         if (IsotopeConfig.SICKNESS.get())
             sickness(player, dose);
+        else
+            RadiationSyndrome.stop(player);
     }
 
     private static void sickness(Player player, float msv) {
+        if (RadiationSyndrome.enabled()) {
+            RadiationSyndrome.tick(player, msv);
+            return;
+        }
+        RadiationSyndrome.stop(player);
         if (msv >= 100f) {
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 160, 0, false, false, true));
             player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, msv >= 1000f ? 1 : 0, false, true, true));
@@ -248,7 +255,7 @@ public final class RadiationEngine {
     }
 
     public static void onHeal(LivingHealEvent ev) {
-        if (IsotopeConfig.SICKNESS.get() && ev.getEntity() instanceof Player p && p.getData(DoseAttachments.DOSE_MSV.get()) >= 1000f)
+        if (ev.getEntity() instanceof Player p && RadiationSyndrome.blocksHealing(p))
             ev.setCanceled(true);
     }
 

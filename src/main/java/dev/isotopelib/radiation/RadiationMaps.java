@@ -57,7 +57,23 @@ public final class RadiationMaps {
         if (stack.isEmpty())
             return Emission.NONE;
         Emission e = stack.getItem() instanceof RadioactiveItem r ? r.emission(stack, gameTime) : stack.getItemHolder().getData(ITEM_EMISSION);
-        return e == null ? Emission.NONE : e;
+        if (e == null)
+            e = Emission.NONE;
+        double dust = Contamination.on() ? Contamination.of(stack) : 0;
+        // the dust sits on the stack as a whole; callers scale one item by the stack's self-shielding
+        return dust > 0 ? combine(e, Contamination.emission(dust / Math.max(1, stack.getCount()))) : e;
+    }
+
+    /** Two sources in one: the activities add up, the shares of each kind are weighted by activity. */
+    static Emission combine(Emission a, Emission b) {
+        if (a.isNone())
+            return b;
+        if (b.isNone())
+            return a;
+        double t = a.activityBq() + b.activityBq();
+        return new Emission(t, (a.alpha() * a.activityBq() + b.alpha() * b.activityBq()) / t,
+                (a.beta() * a.activityBq() + b.beta() * b.activityBq()) / t,
+                (a.gamma() * a.activityBq() + b.gamma() * b.activityBq()) / t, a.dust() || b.dust());
     }
 
     public static Emission emission(BlockState state) {

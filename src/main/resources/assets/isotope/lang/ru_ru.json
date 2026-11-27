@@ -3,11 +3,15 @@
   "death.attack.isotope.radiation.player": "%1$s умер от лучевой болезни, сражаясь с %2$s",
   "isotope.configuration.radiation": "Радиация",
   "isotope.configuration.sickness": "Лучевая болезнь",
+  "isotope.configuration.acuteRadiationSyndrome": "Острая лучевая болезнь",
+  "isotope.configuration.syndromeSpeed": "Скорость болезни",
   "isotope.configuration.falloutKillsPlants": "Осадки губят растения",
+  "isotope.configuration.contamination": "Загрязнение",
   "isotope.configuration.doseTimeScale": "Масштаб времени дозы",
   "isotope.configuration.doseRecoveryMsvPerSecond": "Выведение дозы, мЗв/с",
   "isotope.configuration.doseHalfLifeSeconds": "Период полувыведения дозы, с",
   "isotope.configuration.blockThicknessCm": "Толщина блока, см",
   "isotope.configuration.itemRadiation": "Радиация предметов",
-  "isotope.configuration.falloutDoseRate": "Доза от осадков (мкЗв/с)"
+  "isotope.configuration.falloutDoseRate": "Доза от осадков (мкЗв/с)",
+  "tooltip.isotope.contaminated": "Загрязнено:"
 }

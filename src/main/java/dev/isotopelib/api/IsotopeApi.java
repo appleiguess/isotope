@@ -45,7 +45,31 @@ public final class IsotopeApi {
         return FalloutData.get(level).field().at(x, z);
     }
 
+    /** Lets radioactive dust (becquerels) settle on a player: on the worn armour, and on the skin where none is worn. */
+    public static void contaminate(Player player, double bq) {
+        dev.isotopelib.radiation.Contamination.contaminate(player, bq);
+    }
+
+    /** Becquerels of dust on the player's skin and worn armour. */
+    public static double contamination(Player player) {
+        return dev.isotopelib.radiation.Contamination.onPerson(player);
+    }
+
+    /** Becquerels of dust on an item stack; 0 removes it. */
+    public static double contamination(net.minecraft.world.item.ItemStack stack) {
+        return dev.isotopelib.radiation.Contamination.of(stack);
+    }
+
+    public static void setContamination(net.minecraft.world.item.ItemStack stack, double bq) {
+        dev.isotopelib.radiation.Contamination.set(stack, bq);
+    }
+
     public static int clearFallout(ServerLevel level, double x, double z, int radius) {
         return FalloutData.get(level).clearAround(x, z, radius);
+    }
+
+    /** Phase of the player's radiation sickness: none, prodromal (nausea), latent (feels fine) or manifest (the illness). */
+    public static dev.isotopelib.radiation.SyndromeMath.Phase syndromePhase(Player player) {
+        return dev.isotopelib.radiation.RadiationSyndrome.phase(player);
     }
 }
